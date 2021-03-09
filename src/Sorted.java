@@ -8,19 +8,21 @@ public class Sorted {
     public static void main(String[] args) {
         List<Laptop> pc = new ArrayList<>();
 
-        pc.add(new Laptop("ROG", 120));
-        pc.add(new Laptop("MSI", 150));
-        pc.add(new Laptop("Dell", 100));
-        pc.add(new Laptop("Lenovo", 1500));
-        pc.add(new Laptop("Acer", 1070));
-        pc.add(new Laptop("Asus", 50));
-        pc.add(new Laptop("Gigabyte", 10));
+        pc.add(new Laptop("ROG", 100));
+        pc.add(new Laptop("MSI", 300));
+        pc.add(new Laptop("Dell", 400));
+        pc.add(new Laptop("Lenovo",600 ));
+        pc.add(new Laptop("Gigabyte", 1000));
+        pc.add(new Laptop("Asus",1100 ));
+        pc.add(new Laptop("Acer", 1200));
 
     while (true){
         System.out.println("Select option by typing number:");
         System.out.println("1. View 100 Range Laptop");
         System.out.println("2. View 1000 Range Laptop");
         System.out.println("3. Sort alphabet Laptop name");
+        System.out.println("4. Sort alphabet Laptop name in 100 price range");
+        System.out.println("5. Sort alphabet Laptop name in 1000 price range");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -28,14 +30,14 @@ public class Sorted {
         switch(option) {
             case 1:
                 List<Laptop> hundredRange = pc.stream()
-                        .filter(laptop -> laptop.price>=100)
+                        .filter(laptop -> laptop.price < 1000)
                         .collect(Collectors.toList());
                 hundredRange.forEach(laptop -> System.out.println(laptop.brand));
 
                 break;
             case 2:
                 List<Laptop> thousandRange = pc.stream()
-                        .filter(laptop -> laptop.price>=1000)
+                        .filter(laptop -> laptop.price >= 1000)
                         .collect(Collectors.toList());
                 thousandRange.forEach(laptop -> System.out.println(laptop.brand));
 
@@ -46,29 +48,28 @@ public class Sorted {
                         .collect(Collectors.toList());
                 sortedList.forEach(laptop -> System.out.println(laptop.brand));
                 break;
+            case 4:
+                List<Laptop> hundredSortedRange = pc.stream()
+                        .filter(laptop -> laptop.price < 1000)
+                        .sorted(Comparator.comparing(laptop -> laptop.brand))
+                        .collect(Collectors.toList());
+                hundredSortedRange.forEach(laptop -> System.out.println(laptop.brand));
+
+                break;
+            case 5:
+                List<Laptop> thousandSortedRange = pc.stream()
+                        .filter(laptop -> laptop.price >= 1000)
+                        .sorted(Comparator.comparing(laptop -> laptop.brand))
+                        .collect(Collectors.toList());
+                thousandSortedRange.forEach(laptop -> System.out.println(laptop.brand));
+
+                break;
             default:
                 System.out.println("No such an option!");
         }
     }
 
 
-//        //stream for 100 price range pc
-//        List<Laptop> hundredRange = pc.stream()
-//                .filter(laptop -> laptop.price>=1000)
-//                .collect(Collectors.toList());
-//        //end of stream price range
-
-
-
-        //for loop
-//        List<Laptop> hundredRange = new ArrayList<>();
-//
-//        for(Laptop l : pc){
-//            if (l.price >=1000){
-//                hundredRange.add(l);
-//            }
-//        }
-        //end for loop
     }
     static class Laptop{
         String brand;
